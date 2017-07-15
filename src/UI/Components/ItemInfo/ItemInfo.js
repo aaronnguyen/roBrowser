@@ -210,7 +210,7 @@ define(function(require)
 	}
 
     /**
-     * Extend SkillList window size
+     * Extend ItemInfo window size
      */
     function onResize()
     {
@@ -244,7 +244,7 @@ define(function(require)
 
 
     /**
-     * Extend Item window size
+     * Extend ItemInfo window size
      *
      * @param {number} height
      */
