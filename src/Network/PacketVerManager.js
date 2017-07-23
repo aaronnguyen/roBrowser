@@ -157,13 +157,8 @@ define(['Core/Configs'], function( Configs )
 			out[i].honor = fp.readLong();
 			out[i].jobpoint = fp.readShort();
 
-			if (blockSize < 112) {
-				out[i].hp = fp.readShort();
-				out[i].maxhp = fp.readShort();
-			} else {
-				out[i].hp = fp.readLong();
-				out[i].maxhp = fp.readLong();
-			}
+			out[i].hp = fp.readLong();
+			out[i].maxhp = fp.readLong();
 
 			out[i].sp = fp.readShort();
 			out[i].maxsp = fp.readShort();
@@ -171,7 +166,7 @@ define(['Core/Configs'], function( Configs )
 			out[i].job = fp.readShort();
 			out[i].head = fp.readShort();
 
-			if (blockSize >= 147) {
+			if (PACKETVER.value >= 20141022) {
 				out[i].body = fp.readShort();
 			}
 
@@ -192,45 +187,31 @@ define(['Core/Configs'], function( Configs )
 			out[i].Dex = fp.readUChar();
 			out[i].Luk = fp.readUChar();
 
-			if (blockSize < 108) {
-				out[i].CharNum = fp.readUShort();
-			}
-			else if (blockSize < 124) {
-				out[i].CharNum = fp.readUShort();
-				out[i].haircolor = fp.readUShort();
-			}
-			else {
-				out[i].CharNum = fp.readUChar();
-				out[i].haircolor = fp.readUChar();
+			out[i].CharNum = fp.readUShort();
+			out[i].bIsChangedCharName = fp.readShort();
+
+			if (PACKETVER.value >= 20100720 && PACKETVER.value <= 20100727 || PACKETVER.value >= 20100803) {
+				out[i].lastMap = fp.readString(16);
 			}
 
-			if (blockSize === 116) {
-				fp.seek(0x04, SEEK_CUR); // unknown
+			if (PACKETVER.value >= 20100803) {
+				out[i].deleteDate = fp.readLong();
 			}
 
-			if (blockSize >= 124) {
-				out[i].bIsChangedCharName = fp.readShort();
-				out[i].lastMap = fp.readBinaryString(blockSize === 124 ? 12 : 16);
+			if (PACKETVER.value >= 20110111) {
+				out[i].robe = fp.readLong();
 			}
 
-			if (blockSize >= 132) {
-				out[i].DeleteDate = fp.readLong();
-			}
-
-			if (blockSize >= 136) {
-				out[i].Robe = fp.readLong();
-			}
-
-			if (blockSize >= 140) {
-				out[i].SlotAddon = fp.readLong();
-			}
-
-			if (blockSize >= 144) {
-				out[i].RenameAddon = fp.readLong();
-			}
-
-			if (blockSize >= 145) {
-				out[i].sex = fp.readUChar();
+			if (PACKETVER.value != 20111116) {
+				if (PACKETVER.value >= 20110928) {
+					out[i].SlotAddon = fp.readLong();
+				}
+				if (PACKETVER.value >= 20111025) {
+					out[i].RenameAddon = fp.readLong();
+				}
+				if (PACKETVER.value >= 20141016) {
+					out[i].sex = fp.readUChar();
+				}
 			}
 		}
 
