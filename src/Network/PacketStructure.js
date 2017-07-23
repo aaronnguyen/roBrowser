@@ -11294,11 +11294,23 @@ define(['Utils/BinaryWriter', './PacketVerManager'], function(BinaryWriter, PACK
 		this.lastLoginIP = fp.readULong();
 		this.lastLoginTime = fp.readBinaryString(26);
 		this.Sex = fp.readUChar();
-		this.unknown1 = fp.readStr(17);
-		this.iAccountSID = fp.readLong();
-		this.unknown2 = fp.readStr(128);
+		this.unknown = fp.readString(17);
+		this.ServerList = (function() {
+			var i, count=(end-fp.tell())/32|0, out=new Array(count);
+			for (i = 0; i < count; ++i) {
+				out[i] = {};
+				out[i].ip = fp.readULong();
+				out[i].port = fp.readUShort();
+				out[i].name = fp.readString(20);
+				out[i].usercount = fp.readUShort();
+				out[i].state = fp.readUShort();
+				out[i].property = fp.readUShort();
+				out[i].unknown = fp.readString(128);
+			}
+			return out;
+		})();
 	};
-	PACKET.AC.ACCEPT_LOGIN2.size = 160;
+	PACKET.AC.ACCEPT_LOGIN3.size = -1;
 
 	/**
 	 * Export
