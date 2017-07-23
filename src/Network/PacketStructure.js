@@ -11289,10 +11289,10 @@ define(['Utils/BinaryWriter', './PacketVerManager'], function(BinaryWriter, PACK
 
 
 	// 0xa08
-	PACKET.CA.LOGIN = function PACKET_CA_LOGIN() {
+	PACKET.CZ.REQ_OPEN_WRITE_RODEX = function PACKET_CA_LOGIN() {
 		this.receiver = '';
 	};
-	PACKET.CA.LOGIN.prototype.build = function() {
+	PACKET.CZ.REQ_OPEN_WRITE_RODEX.prototype.build = function() {
 		var pkt_len = 2 + 24;
 		var pkt_buf = new BinaryWriter(pkt_len);
 
