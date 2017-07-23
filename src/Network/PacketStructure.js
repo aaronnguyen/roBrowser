@@ -11288,30 +11288,28 @@ define(['Utils/BinaryWriter', './PacketVerManager'], function(BinaryWriter, PACK
 				out[i].ITID = fp.readUShort();
 				out[i].type = fp.readUChar();
 
-                out[i].location = fp.readULong();
-                out[i].WearState = fp.readULong();
-                out[i].RefiningLevel = fp.readUChar();
-                out[i].slot = {};
-                out[i].slot.card1 = fp.readUShort();
-                out[i].slot.card2 = fp.readUShort();
-                out[i].slot.card3 = fp.readUShort();
-                out[i].slot.card4 = fp.readUShort();
-                out[i].HireExpireDate = fp.readLong();
-                out[i].bindOnEquipType = fp.readUShort();
-                out[i].wItemSpriteNumber = fp.readUShort();
-                if (PACKETVER.value >= 20150226) { // Random Options Support
-                    out[i].option = [];
-                    for (var j = 0; j < 5; j++) {
-                        out[i].option[j] = {};
-                        out[i].option[j].optIndex = fp.readUShort();
-                        out[i].option[j].value = fp.readShort();
-                        out[i].option[j].param = fp.readChar();
-                    }
-                }
-                flag = fp.readUChar();
-                out[i].IsIdentified = flag & 1;
-                out[i].IsDamaged = flag & 2;
-                out[i].PlaceETCTab = flag & 4;
+				out[i].location = fp.readULong();
+				out[i].WearState = fp.readULong();
+				out[i].RefiningLevel = fp.readUChar();
+				out[i].slot = {};
+				out[i].slot.card1 = fp.readUShort();
+				out[i].slot.card2 = fp.readUShort();
+				out[i].slot.card3 = fp.readUShort();
+				out[i].slot.card4 = fp.readUShort();
+				out[i].HireExpireDate = fp.readLong();
+				out[i].bindOnEquipType = fp.readUShort();
+				out[i].wItemSpriteNumber = fp.readUShort();
+				out[i].option = [];
+				for (var j = 0; j < 5; j++) {
+					out[i].option[j] = {};
+					out[i].option[j].optIndex = fp.readUShort();
+					out[i].option[j].value = fp.readShort();
+					out[i].option[j].param = fp.readChar();
+				}
+				flag = fp.readUChar();
+				out[i].IsIdentified = flag & 1;
+				out[i].IsDamaged = flag & 2;
+				out[i].PlaceETCTab = flag & 4;
 			}
 			return out;
 		})();
