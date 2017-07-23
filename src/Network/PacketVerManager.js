@@ -144,6 +144,8 @@ define(['Core/Configs'], function( Configs )
 		}
 
 		for (i = 0, count = length / blockSize; i < count; ++i) {
+
+		    console.log(_value);
 			out[i] = {};
 			out[i].GID = fp.readULong();
 			out[i].exp = fp.readLong();
@@ -166,7 +168,7 @@ define(['Core/Configs'], function( Configs )
 			out[i].job = fp.readShort();
 			out[i].head = fp.readShort();
 
-			if (PACKETVER.value >= 20141022) {
+			if (_value >= 20141022) {
 				out[i].body = fp.readShort();
 			}
 
@@ -190,27 +192,27 @@ define(['Core/Configs'], function( Configs )
 			out[i].CharNum = fp.readUShort();
 			out[i].bIsChangedCharName = fp.readShort();
 
-			if (this._value >= 20100720 && this._value <= 20100727 
-				|| this._value >= 20100803) {
+			if (_value >= 20100720 && _value <= 20100727 
+				|| _value >= 20100803) {
 				out[i].lastMap = fp.readString(16);
 			}
 
-			if (this._value >= 20100803) {
+			if (_value >= 20100803) {
 				out[i].deleteDate = fp.readLong();
 			}
 
-			if (this._value >= 20110111) {
+			if (_value >= 20110111) {
 				out[i].robe = fp.readLong();
 			}
 
-			if (this._value != 20111116) {
-				if (PACKETVER.value >= 20110928) {
+			if (_value !== 20111116) {
+				if (_value >= 20110928) {
 					out[i].SlotAddon = fp.readLong();
 				}
-				if (this._value >= 20111025) {
+				if (_value >= 20111025) {
 					out[i].RenameAddon = fp.readLong();
 				}
-				if (this._value >= 20141016) {
+				if (_value >= 20141016) {
 					out[i].sex = fp.readUChar();
 				}
 			}

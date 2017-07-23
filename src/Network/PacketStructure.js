@@ -145,6 +145,7 @@ define(['Utils/BinaryWriter', './PacketVerManager'], function(BinaryWriter, PACK
 	};
 	PACKET.CZ.ENTER.prototype.build = function() {
 		var ver = this.getPacketVersion();
+		console.log(ver);
 		var pkt = new BinaryWriter(ver[2]);
 
 		pkt.writeShort(ver[1]);
