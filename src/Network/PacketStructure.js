@@ -10995,7 +10995,7 @@ define(['Utils/BinaryWriter', './PacketVerManager'], function(BinaryWriter, PACK
 	PACKET.HC.CHARLIST_NOTIFY = function PACKET_HC_CHARLIST_NOTIFY(fp, end) {
 		this.TotalCnt = fp.readLong();
 		if (PACKETVER.value >= 20151001) {
-			this.char_slots = fp.readLong();
+			this.charSlots = fp.readLong();
 		}
 	};
 	PACKET.HC.CHARLIST_NOTIFY.size = (PACKETVER.value >= 20151001 ? 10 : 6);
@@ -11297,9 +11297,9 @@ define(['Utils/BinaryWriter', './PacketVerManager'], function(BinaryWriter, PACK
 		this.lastLoginIP = fp.readULong();
 		this.lastLoginTime = fp.readBinaryString(26);
 		this.Sex = fp.readUChar();
-		this.unknown = fp.readString(17);
+		this.unknown = fp.readBinaryString(17);
 		this.ServerList = (function() {
-			var i, count=(end-fp.tell())/32|0, out=new Array(count);
+			var i, count=(end-fp.tell())/160|0, out=new Array(count);
 			for (i = 0; i < count; ++i) {
 				out[i] = {};
 				out[i].ip = fp.readULong();
@@ -11308,7 +11308,7 @@ define(['Utils/BinaryWriter', './PacketVerManager'], function(BinaryWriter, PACK
 				out[i].usercount = fp.readUShort();
 				out[i].state = fp.readUShort();
 				out[i].property = fp.readUShort();
-				out[i].unknown = fp.readString(128);
+				out[i].unknown = fp.readBinaryString(128);
 			}
 			return out;
 		})();
