@@ -190,26 +190,27 @@ define(['Core/Configs'], function( Configs )
 			out[i].CharNum = fp.readUShort();
 			out[i].bIsChangedCharName = fp.readShort();
 
-			if (PACKETVER.value >= 20100720 && PACKETVER.value <= 20100727 || PACKETVER.value >= 20100803) {
+			if (this._value >= 20100720 && this._value <= 20100727 
+				|| this._value >= 20100803) {
 				out[i].lastMap = fp.readString(16);
 			}
 
-			if (PACKETVER.value >= 20100803) {
+			if (this._value >= 20100803) {
 				out[i].deleteDate = fp.readLong();
 			}
 
-			if (PACKETVER.value >= 20110111) {
+			if (this._value >= 20110111) {
 				out[i].robe = fp.readLong();
 			}
 
-			if (PACKETVER.value != 20111116) {
+			if (this._value != 20111116) {
 				if (PACKETVER.value >= 20110928) {
 					out[i].SlotAddon = fp.readLong();
 				}
-				if (PACKETVER.value >= 20111025) {
+				if (this._value >= 20111025) {
 					out[i].RenameAddon = fp.readLong();
 				}
-				if (PACKETVER.value >= 20141016) {
+				if (this._value >= 20141016) {
 					out[i].sex = fp.readUChar();
 				}
 			}
