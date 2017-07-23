@@ -10994,8 +10994,11 @@ define(['Utils/BinaryWriter', './PacketVerManager'], function(BinaryWriter, PACK
 	// 0x9a0
 	PACKET.HC.CHARLIST_NOTIFY = function PACKET_HC_CHARLIST_NOTIFY(fp, end) {
 		this.TotalCnt = fp.readLong();
+		if (PACKETVER.value >= 20151001) {
+			this.char_slots = fp.readLong();
+		}
 	};
-	PACKET.HC.CHARLIST_NOTIFY.size = 6;
+	PACKET.HC.CHARLIST_NOTIFY.size = (PACKETVER.value >= 20151001 ? 10 : 6);
 
 
 	// 0x9ca
