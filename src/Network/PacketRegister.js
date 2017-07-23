@@ -569,6 +569,6 @@ define( ['./PacketStructure' ], function( PACKET )
 		0xa18: PACKET.ZC.ACCEPT_ENTER3, // ok
 
 		0xac4: PACKET.AC.ACCEPT_LOGIN3,
-        0xa3b: PACKET.ZC.HAT_EFFECT,
+        0xa3b: PACKET.ZC.HAT_EFFECT
 	};
 });

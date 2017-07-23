@@ -188,11 +188,16 @@ define(function( require )
 		}
 
 		// Hook packets
-		Network.hookPacket( PACKET.AC.ACCEPT_LOGIN3,    onConnectionAccepted );
+        if (PACKETVER.value >= 20141022 && PACKETVER.value < 20160330) {
+            Network.hookPacket( PACKET.AC.ACCEPT_LOGIN3,    onConnectionAccepted );
+        } else {
+            Network.hookPacket( PACKET.AC.ACCEPT_LOGIN2,    onConnectionAccepted );
+        }
 		Network.hookPacket( PACKET.AC.REFUSE_LOGIN,    onConnectionRefused );
 		Network.hookPacket( PACKET.AC.REFUSE_LOGIN_R2, onConnectionRefused );
 		Network.hookPacket( PACKET.SC.NOTIFY_BAN,      onServerClosed );
-	}
+
+    }
 
 
 	/**

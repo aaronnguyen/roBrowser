@@ -11318,7 +11318,7 @@ define(['Utils/BinaryWriter', './PacketVerManager'], function(BinaryWriter, PACK
     // 0xa3b
     PACKET.ZC.HAT_EFFECT = function PACKET_ZC_HAT_EFFECT(fp, end) {
         this.GID = fp.readULong();
-        this.one = fp.readChar(); // Always 1
+        this.enabled = fp.readChar(); // Always 1
         this.hatEffectIDs = (function() {
             var i, count=(end-fp.tell())/2|0, out=new Array(count);
             for (i = 0; i < count; ++i) {
