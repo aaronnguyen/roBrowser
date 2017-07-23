@@ -7459,9 +7459,7 @@ define(['Utils/BinaryWriter', './PacketVerManager'], function(BinaryWriter, PACK
 			for (i = 0; i < count; ++i) {
 				out[i] = {};
 				out[i].GID = fp.readULong();
-				if (out[i].GID != 0) {
-					out[i].szExpireDate = fp.readBinaryString(20);
-				}
+                out[i].szExpireDate = fp.readBinaryString(20);
 			}
 			return out;
 		})();
@@ -11316,6 +11314,20 @@ define(['Utils/BinaryWriter', './PacketVerManager'], function(BinaryWriter, PACK
 		})();
 	};
 	PACKET.AC.ACCEPT_LOGIN3.size = -1;
+
+    // 0xa3b
+    PACKET.ZC.HAT_EFFECT = function PACKET_ZC_HAT_EFFECT(fp, end) {
+        this.GID = fp.readULong();
+        this.one = fp.readChar(); // Always 1
+        this.hatEffectIDs = (function() {
+            var i, count=(end-fp.tell())/2|0, out=new Array(count);
+            for (i = 0; i < count; ++i) {
+                out[i] = fp.readShort();
+            }
+            return out;
+        })();
+    };
+    PACKET.ZC.HAT_EFFECT.size = -1;
 
 	/**
 	 * Export
