@@ -11277,6 +11277,61 @@ define(['Utils/BinaryWriter', './PacketVerManager'], function(BinaryWriter, PACK
 	};
 	PACKET.ZC.SHORTCUT_KEY_LIST_V3.size = 269;
 
+	// 0xa0d
+	PACKET.ZC.EQUIPMENT_ITEMLIST5 = function PACKET_ZC_EQUIPMENT_ITEMLIST5(fp, end) {
+		this.ItemInfo = (function() {
+			var i, count = (end - fp.tell()) / 31 | 0,
+				out = new Array(count);
+			var flag;
+			for (i = 0; i < count; ++i) {
+				out[i] = {};
+				out[i].index = fp.readShort();
+				out[i].ITID = fp.readUShort();
+				out[i].type = fp.readUChar();
+
+				if (end - fp.tell() == 31) {
+					out[i].location = fp.readULong();
+					out[i].WearState = fp.readULong();
+					out[i].RefiningLevel = fp.readUChar();
+					out[i].slot = {};
+					out[i].slot.card1 = fp.readUShort();
+					out[i].slot.card2 = fp.readUShort();
+					out[i].slot.card3 = fp.readUShort();
+					out[i].slot.card4 = fp.readUShort();
+					out[i].HireExpireDate = fp.readLong();
+					out[i].bindOnEquipType = fp.readUShort();
+					out[i].wItemSpriteNumber = fp.readUShort();
+					if (PACKETVER.value >= 20150226) { // Random Options Support
+						out[i].option = [];
+						for (var j = 0; j < 5; j++) {
+							out[i].option[j] = {};
+							out[i].option[j].optIndex = fp.readUShort();
+							out[i].option[j].value = fp.readShort();
+							out[i].option[j].param = fp.readChar();
+						}
+					}
+					flag = fp.readUChar();
+					out[i].IsIdentified = flag & 1;
+					out[i].IsDamaged = flag & 2;
+					out[i].PlaceETCTab = flag & 4;
+				} else if (end - fp.tell() == 24) {
+					out[i].amount = fp.readShort();
+					out[i].WearState = fp.readULong();
+					out[i].slot.card1 = fp.readUShort();
+					out[i].slot.card2 = fp.readUShort();
+					out[i].slot.card3 = fp.readUShort();
+					out[i].slot.card4 = fp.readUShort();
+					out[i].expireTime = fp.readULong();
+					flag = fp.readUChar();
+					out[i].IsIdentified = flag & 0x1;
+					out[i].PlaceETCTab = flag & 0x2;
+				}
+			}
+			return out;
+		})();
+	};
+	PACKET.ZC.EQUIPMENT_ITEMLIST5.size = -1;
+
 
 	// 0xa18
 	PACKET.ZC.ACCEPT_ENTER3 = function PACKET_ZC_ACCEPT_ENTER3(fp, end) {
