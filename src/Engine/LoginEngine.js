@@ -188,10 +188,10 @@ define(function( require )
 		}
 
 		// Hook packets
-        if (PACKETVER.value >= 20141022 && PACKETVER.value < 20160330) {
+        if (PACKETVER.value >= 20170315) {
             Network.hookPacket( PACKET.AC.ACCEPT_LOGIN3,    onConnectionAccepted );
         } else {
-            Network.hookPacket( PACKET.AC.ACCEPT_LOGIN2,    onConnectionAccepted );
+            Network.hookPacket( PACKET.AC.ACCEPT_LOGIN,    onConnectionAccepted );
         }
 		Network.hookPacket( PACKET.AC.REFUSE_LOGIN,    onConnectionRefused );
 		Network.hookPacket( PACKET.AC.REFUSE_LOGIN_R2, onConnectionRefused );
