@@ -7459,7 +7459,9 @@ define(['Utils/BinaryWriter', './PacketVerManager'], function(BinaryWriter, PACK
 			for (i = 0; i < count; ++i) {
 				out[i] = {};
 				out[i].GID = fp.readULong();
-				out[i].szExpireDate = fp.readBinaryString(20);
+				if (out[i].GID != 0) {
+					out[i].szExpireDate = fp.readBinaryString(20);
+				}
 			}
 			return out;
 		})();
