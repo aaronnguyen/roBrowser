@@ -10723,6 +10723,7 @@ define(['Utils/BinaryWriter', './PacketVerManager'], function(BinaryWriter, PACK
 				out[i].index = fp.readShort();
 				out[i].ITID = fp.readUShort();
 				out[i].type = fp.readUChar();
+
 				out[i].count = fp.readShort();
 				out[i].WearState = fp.readULong();
 				out[i].slot = {};
@@ -11279,7 +11280,7 @@ define(['Utils/BinaryWriter', './PacketVerManager'], function(BinaryWriter, PACK
 	// 0xa0d
 	PACKET.ZC.EQUIPMENT_ITEMLIST5 = function PACKET_ZC_EQUIPMENT_ITEMLIST5(fp, end) {
 		this.ItemInfo = (function() {
-			var i, count = (end - fp.tell()) / 31 | 0,
+			var i, count = (end - fp.tell()) / 57 | 0,
 				out = new Array(count);
 			var flag;
 			for (i = 0; i < count; ++i) {
@@ -11299,6 +11300,7 @@ define(['Utils/BinaryWriter', './PacketVerManager'], function(BinaryWriter, PACK
 				out[i].HireExpireDate = fp.readLong();
 				out[i].bindOnEquipType = fp.readUShort();
 				out[i].wItemSpriteNumber = fp.readUShort();
+				out[i].nRandomOptionCnt = fp.readChar();
 				out[i].option = [];
 				for (var j = 0; j < 5; j++) {
 					out[i].option[j] = {};
