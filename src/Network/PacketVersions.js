@@ -1425,6 +1425,10 @@ define( ['./PacketStructure'], function( PACKET )
 			[PACKET.CZ.ACK_STORE_PASSWORD,0x0438,36,0],
 		],
 		
+		// 2015-04-22aRagexeRE
+		20150422: [
+			[PACKET.CZ.ENTER,0x022d,19,2,6,10,14,18]
+		],
 		
 		// 2015-05-13aRagexe
 		20150513: [
@@ -1449,5 +1453,6 @@ define( ['./PacketStructure'], function( PACKET )
 			// packet(0x09e8,11); //CZ_OPEN_MAILBOX
 			// packet(0x0a2e,6); //TITLE
 		],
+		
 	};
 });
