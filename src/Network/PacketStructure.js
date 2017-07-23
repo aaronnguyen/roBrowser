@@ -11324,7 +11324,7 @@ define(['Utils/BinaryWriter', './PacketVerManager'], function(BinaryWriter, PACK
 			this.randomOptions[i].param = fp.readChar();
 		}
 	};
-	PACKET.ZC.ADD_EXCHANGE_ITEM3.size = 44;
+	PACKET.ZC.ADD_EXCHANGE_ITEM3.size = 45;
 
 
 	// 0xa0a
@@ -11405,7 +11405,7 @@ define(['Utils/BinaryWriter', './PacketVerManager'], function(BinaryWriter, PACK
 			this.randomOptions[i].param = fp.readChar();
 		}
 	};
-	PACKET.ZC.ITEM_PICKUP_ACK6.size = 54;
+	PACKET.ZC.ITEM_PICKUP_ACK6.size = 56;
 
 
 	// 0xa0d
