@@ -11286,6 +11286,20 @@ define(['Utils/BinaryWriter', './PacketVerManager'], function(BinaryWriter, PACK
 	PACKET.ZC.ACCEPT_ENTER3.size = 14;
 
 
+	// 0xac4
+	PACKET.AC.ACCEPT_LOGIN3 = function PACKET_AC_ACCEPT_LOGIN3(fp, end) {
+		this.AuthCode = fp.readLong();
+		this.AID = fp.readULong();
+		this.userLevel = fp.readULong();
+		this.lastLoginIP = fp.readULong();
+		this.lastLoginTime = fp.readBinaryString(26);
+		this.Sex = fp.readUChar();
+		this.unknown1 = fp.readStr(17);
+		this.iAccountSID = fp.readLong();
+		this.unknown2 = fp.readStr(128);
+	};
+	PACKET.AC.ACCEPT_LOGIN2.size = 160;
+
 	/**
 	 * Export
 	 */
